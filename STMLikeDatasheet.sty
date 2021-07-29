@@ -1,0 +1,102 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{STMLikeDatasheet}[2021/07/21 Generates datasheeet style]
+
+
+
+\RequirePackage[english,russian]{babel} 
+\RequirePackage{fontspec} 
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic} 
+\setmainfont[Ligatures={TeX}]{Calibri}
+
+\RequirePackage[explicit]{titlesec}
+\RequirePackage{xcolor}
+
+\RequirePackage{lastpage} %Номер последней страницы
+\RequirePackage[runs]{zref} %Счетчик сборок
+
+\RequirePackage{booktabs}
+
+\RequirePackage{lipsum}% just to generate text for the example
+%\RequirePackage{showframe}
+
+\RequirePackage{graphicx}
+%\graphicspath{ {./images/} }
+
+%**************************************************************************
+%	Отступы
+%**************************************************************************
+\RequirePackage{geometry} % Простой способ задавать поля
+	\geometry{top=25mm}
+	\geometry{bottom=30mm}
+	\geometry{left=25mm}
+	\geometry{right=25mm}
+
+%**************************************************************************
+%	Переменные
+%	Заполнить для колонтитулов
+%**************************************************************************
+
+\newcommand\doctitle{Наименование документа}
+\newcommand\docid{ID документа}
+\newcommand\docrev{Ревизися документа}
+
+
+
+%**************************************************************************
+%	Колонтитулы (после настройки отступов)
+%**************************************************************************
+
+
+\RequirePackage{fancyhdr} %загрузим пакет
+\pagestyle{fancy} %применим колонтитул
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\fancyhf{} %очистим хидер на всякий случай
+
+
+\fancyhead[LO,RE]{\doctitle}
+\fancyhead[RO,LE]{\uppercase{\leftmark}}
+
+\fancyfoot[C]{DocID:\docid; ~Rev:\docrev.\zruns}
+\fancyfoot[LE,RO]{\thepage/\pageref{LastPage}} 
+
+
+\renewcommand{\headrulewidth}{1pt}% Default \headrulewidth is 0.4pt
+\renewcommand{\footrulewidth}{1pt}% Default \footrulewidth is 0pt
+
+
+
+%**************************************************************************
+%	Настройки секций
+%**************************************************************************
+
+\definecolor{myblue}{RGB}{0,0,0}
+\newlength\mylen
+\setlength\mylen{15mm}
+
+\titleformat{\section}
+{\Large\bfseries}{\llap{\makebox[\mylen][l]{\textcolor{myblue}{\thesection}}\hfill}}{0em}{#1}
+
+\titleformat{\subsection}
+{\normalfont\bfseries}{\llap{\makebox[\mylen][l]{\textcolor{myblue}{\thesubsection}}\hfill}}{-0em}{#1}
+
+% текст начинается в той же строке [runin]
+\titleformat{\subsubsection}
+{\normalfont\bfseries}{\llap{\makebox[\mylen][l]{\textcolor{myblue}{\thesubsubsection}}\hfill}}{0em}{#1}
+
+
+\titlespacing*{\section}
+{0pt}{3.25ex plus 1ex minus .2ex}{0pt}
+\titlespacing*{\subsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{0pt}
+\titlespacing*{\subsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{0pt}
+
+% Для ТУ
+\newcommand{\tu}[1]{\textit{#1}}
+
+
+
+%***************************************************************************
+%
+%***************************************************************************
+
